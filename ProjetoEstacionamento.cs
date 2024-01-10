@@ -4,19 +4,19 @@ using System.Linq;
 
 class Estacionamento
 {
-    private decimal precoInicial = 0;
-    private decimal precoPorHora = 0;
+    private decimal valorInicial = 0;
+    private decimal valorPorHora = 0;
     private List<Veiculo> veiculosEstacionados = new List<Veiculo>();
 
-    public Estacionamento(decimal precoInicial, decimal precoPorHora)
+    public Estacionamento(decimal valorInicial, decimal valorPorHora)
     {
-        this.precoInicial = precoInicial;
-        this.precoPorHora = precoPorHora;
+        this.valorInicial = valorInicial;
+        this.valorPorHora = valorPorHora;
     }
 
     public void AdicionarVeiculo()
     {
-        Console.WriteLine("Digite a placa do veículo:");
+        Console.WriteLine("Informe a placa do veículo:");
         string placa = Console.ReadLine();
 
         if (!VeiculoExiste(placa))
@@ -27,31 +27,31 @@ class Estacionamento
         }
         else
         {
-            Console.WriteLine("Veículo já estacionado.");
+            Console.WriteLine("Veículo já está estacionado.");
         }
     }
 
     public void RemoverVeiculo()
     {
-        Console.WriteLine("Digite a placa do veículo para remover:");
+        Console.WriteLine("Informe a placa do veículo para remover:");
         string placa = Console.ReadLine();
 
         Veiculo veiculo = veiculosEstacionados.FirstOrDefault(v => v.Placa.ToUpper() == placa.ToUpper());
 
         if (veiculo != null)
         {
-            Console.WriteLine("Digite a quantidade de horas que o veículo permaneceu estacionado:");
+            Console.WriteLine("Tempo de permanência:");
             int horas = Convert.ToInt32(Console.ReadLine());
 
-            decimal valorTotal = precoInicial + (precoPorHora * horas);
+            decimal valorTotal = valorInicial + (valorPorHora * horas);
 
             veiculosEstacionados.Remove(veiculo);
 
-            Console.WriteLine($"O veículo com placa {placa} foi removido e o preço total foi de: R$ {valorTotal}");
+            Console.WriteLine($"O veículo com placa {placa} foi removido e o valor total é: R$ {valorTotal}");
         }
         else
         {
-            Console.WriteLine("Veículo não encontrado no estacionamento.");
+            Console.WriteLine("Veículo não encontrado.");
         }
     }
 
@@ -94,26 +94,26 @@ class Program
     {
         Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-        decimal precoInicial = 0;
-        decimal precoPorHora = 0;
+        decimal valorInicial = 0;
+        decimal valorPorHora = 0;
 
         Console.WriteLine("Bem-vindo ao sistema de estacionamento!\n" +
-                          "Digite o preço inicial:");
-        precoInicial = Convert.ToDecimal(Console.ReadLine());
+                          "Informe o valor inicial:");
+        valorInicial = Convert.ToDecimal(Console.ReadLine());
 
-        Console.WriteLine("Agora, digite o preço por hora:");
-        precoPorHora = Convert.ToDecimal(Console.ReadLine());
+        Console.WriteLine("Valor por hora:");
+        valorPorHora = Convert.ToDecimal(Console.ReadLine());
 
-        Estacionamento estacionamento = new Estacionamento(precoInicial, precoPorHora);
+        Estacionamento estacionamento = new Estacionamento(valorInicial, valorPorHora);
 
-        string opcao = string.Empty;
+        string escolha = string.Empty;
         bool exibirMenu = true;
 
         while (exibirMenu)
         {
             Console.Clear();
-            Console.WriteLine("Digite a sua opção:");
-            Console.WriteLine("1 - Cadastrar veículo");
+            Console.WriteLine("Informe a sua escolha:");
+            Console.WriteLine("1 - Adicionar veículo");
             Console.WriteLine("2 - Remover veículo");
             Console.WriteLine("3 - Listar veículos");
             Console.WriteLine("4 - Encerrar");
@@ -148,3 +148,4 @@ class Program
         Console.WriteLine("O programa encerrou");
     }
 }
+
